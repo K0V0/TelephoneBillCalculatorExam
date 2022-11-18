@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static kovo.logic.Utils.getPriceFromSubCollection;
+
 public class Customer extends Price implements Comparable<Customer> {
 
     private static final String BEST_CONSUMER_DISCOUNT_PRICE = "0";
@@ -32,9 +34,7 @@ public class Customer extends Price implements Comparable<Customer> {
 
     @Override
     protected BigDecimal calculatePrice() {
-        return calls.stream()
-                .map(Call::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return getPriceFromSubCollection(calls);
     }
 
     @Override

@@ -6,6 +6,8 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static kovo.logic.Utils.getPriceFromSubCollection;
+
 public class Call extends Price {
 
     private final LocalDateTime startTime;
@@ -26,9 +28,7 @@ public class Call extends Price {
 
     @Override
     protected BigDecimal calculatePrice() {
-        return pricedUnits.stream()
-                .map(PricedUnit::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return getPriceFromSubCollection(pricedUnits);
     }
 
     private void setPriceUnits() {

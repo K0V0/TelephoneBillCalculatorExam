@@ -2,7 +2,7 @@ package kovo.logic;
 
 import java.math.BigDecimal;
 
-public abstract class Price {
+public abstract class Price implements PriceIface {
 
     private BigDecimal price;
 

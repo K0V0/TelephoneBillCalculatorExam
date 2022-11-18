@@ -3,10 +3,12 @@ package kovo;
 import kovo.logic.Customer;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import static kovo.logic.Utils.getPriceFromSubCollection;
 import static kovo.logic.Utils.parseCallsLog;
 
 public class TelephoneBillCalculatorImpl implements TelephoneBillCalculator {
@@ -31,8 +33,6 @@ public class TelephoneBillCalculatorImpl implements TelephoneBillCalculator {
     }
 
     private BigDecimal sumPrices() {
-         return customersMap.values().stream()
-                .map(Customer::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+         return getPriceFromSubCollection(new ArrayList<>(customersMap.values()));
     }
 }

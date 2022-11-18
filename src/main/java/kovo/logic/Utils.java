@@ -2,9 +2,11 @@ package kovo.logic;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Utils {
@@ -29,6 +31,12 @@ public class Utils {
                     result.putIfAbsent(lineData[0], customer);
                 });
         return result;
+    }
+
+    public static <T extends PriceIface> BigDecimal getPriceFromSubCollection(List<T> subCollection) {
+        return subCollection.stream()
+                .map(PriceIface::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

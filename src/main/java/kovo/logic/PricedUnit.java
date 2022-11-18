@@ -17,10 +17,9 @@ public class PricedUnit extends Price {
 
     @Override
     protected BigDecimal calculatePrice() {
-        if (startTime.getHour() >= 8 && startTime.getHour() < 16) {
-            return new BigDecimal(RUSH_HOURS_PRICE);
-        }
-        return new BigDecimal(WEAK_HOURS_PRICE);
+        return startTime.getHour() >= 8 && startTime.getHour() < 16
+            ? new BigDecimal(RUSH_HOURS_PRICE)
+            : new BigDecimal(WEAK_HOURS_PRICE);
     }
 
     public void applyLongCallDiscountPrice() {
